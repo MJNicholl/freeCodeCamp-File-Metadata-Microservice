@@ -17,14 +17,18 @@ app.get('/', function (req, res) {
 
 // start
 
-app.post("/api/fileanalyse", upload.single("upfile"), (req, res) => {
-  console.log("\nreq.file: \n", req.file);
+function CheckUploadedFile(req, res)
+{
   let answer = {
     "name": req.file.originalname,
     "type": req.file.mimetype,
     "size": Number(req.file.size)
   };
   res.send(answer)
+}
+
+app.post("/api/fileanalyse", upload.single("upfile"), (req, res) => {
+  CheckUploadedFile(req, res);
 })
 
 // end
